@@ -13,6 +13,4 @@
         <property name="name" value="Dummy Name"></property>
     </bean>
 
-    <bean name="aspect" class="info.atende.audition.appclient.spring.AuditAspect" >
-    </bean>
 </beans>
