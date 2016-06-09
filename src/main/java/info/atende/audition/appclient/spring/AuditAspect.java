@@ -6,9 +6,11 @@ import info.atende.audition.model.SecurityLevel;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.lang.reflect.Method;
 import java.time.LocalDateTime;
@@ -18,9 +20,26 @@ import java.time.LocalDateTime;
  */
 @Aspect
 public class AuditAspect {
-    Logger logger = LoggerFactory.getLogger(AuditAspect.class);
-    // TODO target ElementType.Type
-    @Around("execution(* info.atende.audition.appclient.spring.CustomerService.print*(..))")
+
+    private Logger logger = LoggerFactory.getLogger(AuditAspect.class);
+
+    private AuditAspectDispatcher dispatcher;
+
+    @Pointcut("within(@info.atende.audition.appclient.spring.Auditable *)")
+    public void beanAnnotatedWithAuditable() {}
+
+    @Pointcut("execution(public * *(..))")
+    public void publicMethod() {}
+
+    @Pointcut("publicMethod() && beanAnnotatedWithAuditable()")
+    public void publicMethodInsideAClassMarkedWithAuditable() {}
+
+    @Autowired
+    public AuditAspect(AuditAspectDispatcher dispatcher) {
+        this.dispatcher = dispatcher;
+    }
+
+    @Around("publicMethodInsideAClassMarkedWithAuditable()")
     public void dispatchAuditEvent(ProceedingJoinPoint joinPoint) throws Throwable {
         try {
             joinPoint.proceed();
@@ -31,8 +50,7 @@ public class AuditAspect {
 
     }
 
-    void dispatchEvent(ProceedingJoinPoint joinPoint) throws Throwable {
-
+    private void dispatchEvent(ProceedingJoinPoint joinPoint) throws Throwable {
         final String methodName = joinPoint.getSignature().getName();
         final MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         /**
@@ -63,35 +81,34 @@ public class AuditAspect {
         }
 
         Audited annotation = method.getAnnotation(Audited.class);
-
-        AuditEvent event = new AuditEvent();
+        String action;
+        SecurityLevel level;
+        String description = "";
+        Resource resource = new Resource();
         if(annotation == null){
-            event.setAction(methodName);
-            event.setSecurityLevel(SecurityLevel.NORMAL);
+            action = methodName;
+            level = SecurityLevel.NORMAL;
+            resource.setResourceType("");
+            resource.setResourceId("");
         }else{
             if(!annotation.action().trim().equals("")){
-                event.setAction(annotation.action());
+                action = annotation.action();
             }else {
-                event.setAction(methodName);
+                action = methodName;
             }
             if(!annotation.description().trim().equals("")){
-                event.setDescription(annotation.description());
+                description = annotation.description();
             }
-            Resource r = new Resource();
-            r.setResourceType(annotation.resourceType());
-            r.setResourceId(annotation.resourceId());
-            event.setResource(r);
-            event.setSecurityLevel(annotation.securityLevel());
+            resource.setResourceType(annotation.resourceType());
+            resource.setResourceId(annotation.resourceId());
+            level = annotation.securityLevel();
 
         }
 
-        event.setDateTime(LocalDateTime.now());
+        dispatcher.dispatchEvent(action, resource, level,LocalDateTime.now(), description);
+    }
 
-        // Get Ip and get UserName
-        logger.trace("Intercepted Audit Method");
-        System.out.println("=======");
-        System.out.println("hijacked : " + joinPoint.getSignature().getName());
-        System.out.println(event);
-        System.out.println("*******");
+    public void setDispatcher(AuditAspectDispatcher dispatcher) {
+        this.dispatcher = dispatcher;
     }
 }

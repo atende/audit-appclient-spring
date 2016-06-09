@@ -1,10 +1,12 @@
 package info.atende.audition.appclient.spring.test;
 
+import info.atende.audition.appclient.spring.Auditable;
 import info.atende.audition.appclient.spring.NoAudit;
 
 /**
  * @author Giovanni Silva.
  */
+@Auditable
 public class TestTargetNoAuditMethod {
 
     @NoAudit
