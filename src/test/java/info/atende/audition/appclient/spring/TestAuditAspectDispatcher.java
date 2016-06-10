@@ -4,33 +4,38 @@ import info.atende.audition.model.AuditEvent;
 import info.atende.audition.model.Resource;
 import info.atende.audition.model.SecurityLevel;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.internal.verification.VerificationModeFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.security.core.Authentication;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 /**
  * @author Giovanni Silva.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("/test-config.xml")
 public class TestAuditAspectDispatcher {
-    @Autowired
-    AuditAspectDispatcher dispatcher;
 
     @Test
     public void dispatch_event(){
+        // Mocks
         RabbitTemplate mockTemplate = mock(RabbitTemplate.class);
+        HttpServletRequest mockRequest = mock(HttpServletRequest.class);
+        UserDetailsProvider mockDetailsProvider = mock(UserDetailsProvider.class);
+        AuthenticationFacade mockAuthenticationFacade = mock(AuthenticationFacade.class);
+        Authentication authentication = mock(Authentication.class);
+
+        // Mock behavior
+        when(mockRequest.getRemoteAddr()).thenReturn("10.10.2.1");
+        when(mockDetailsProvider.getUserName(anyObject())).thenReturn("user");
+        when(mockAuthenticationFacade.getAuthentication()).thenReturn(authentication);
+
+        AuditAspectDispatcher dispatcher = new AuditAspectDispatcher(mockTemplate,
+                    mockRequest, mockDetailsProvider, mockAuthenticationFacade);
 
         dispatcher.setRabbit(mockTemplate);
 
@@ -38,7 +43,7 @@ public class TestAuditAspectDispatcher {
         LocalDateTime time = LocalDateTime.of(2015,3,3,3,33);
         AuditEvent event = new AuditEvent("mock","user","action",r,time,"10.10.2.1",SecurityLevel.NORMAL);
 
-        dispatcher.dispatchEvent("action", r, SecurityLevel.NORMAL,time,"description");
+        dispatcher.dispatchEvent("action", r, SecurityLevel.NORMAL,time,null);
         verify(mockTemplate, VerificationModeFactory.times(1)).convertAndSend(eq(event));
     }
 }
