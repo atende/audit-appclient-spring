@@ -4,20 +4,13 @@ import info.atende.audition.appclient.spring.test.TestTarget;
 import info.atende.audition.appclient.spring.test.TestTargetNoAuditClass;
 import info.atende.audition.appclient.spring.test.TestTargetNoAuditMethod;
 import info.atende.audition.model.SecurityLevel;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.springframework.aop.aspectj.annotation.AspectJProxyFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.annotation.PostConstruct;
-
 import static org.mockito.Mockito.*;
-import static org.mockito.MockitoAnnotations.initMocks;
 
 /**
  * Unit Test for AuditAspect

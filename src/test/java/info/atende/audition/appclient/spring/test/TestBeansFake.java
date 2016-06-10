@@ -4,6 +4,8 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.servlet.http.HttpServletRequest;
+
 import static org.mockito.Mockito.mock;
 
 /**
@@ -11,13 +13,17 @@ import static org.mockito.Mockito.mock;
  * @author Giovanni Silva.
  */
 @Configuration
-public class RabbitMQConfig {
+public class TestBeansFake {
 
     public RabbitTemplate rabbitTemplateMock;
 
     @Bean
     public RabbitTemplate rabbitTemplateMock(){
         return mock(RabbitTemplate.class);
+    }
+    @Bean
+    public HttpServletRequest httpServletRequest(){
+        return mock(HttpServletRequest.class);
     }
 
 }

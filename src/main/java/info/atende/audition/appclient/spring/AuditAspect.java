@@ -1,6 +1,5 @@
 package info.atende.audition.appclient.spring;
 
-import info.atende.audition.model.AuditEvent;
 import info.atende.audition.model.Resource;
 import info.atende.audition.model.SecurityLevel;
 import org.aspectj.lang.ProceedingJoinPoint;
