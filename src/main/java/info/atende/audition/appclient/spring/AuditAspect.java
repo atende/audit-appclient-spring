@@ -27,6 +27,7 @@ import java.time.LocalDateTime;
  */
 @Aspect
 @Component
+@SuppressWarnings("unchecked")
 public class AuditAspect {
 
     private Logger logger = LoggerFactory.getLogger(AuditAspect.class);
@@ -116,7 +117,7 @@ public class AuditAspect {
         dispatcher.dispatchEvent(action, resource, level,LocalDateTime.now(), description);
     }
 
-    public void setDispatcher(AuditAspectDispatcher dispatcher) {
+    void setDispatcher(AuditAspectDispatcher dispatcher) {
         this.dispatcher = dispatcher;
     }
 }
