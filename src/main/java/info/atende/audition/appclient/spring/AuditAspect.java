@@ -1,5 +1,8 @@
 package info.atende.audition.appclient.spring;
 
+import info.atende.audition.appclient.spring.annotations.Auditable;
+import info.atende.audition.appclient.spring.annotations.Audited;
+import info.atende.audition.appclient.spring.annotations.NoAudit;
 import info.atende.audition.model.Resource;
 import info.atende.audition.model.SecurityLevel;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -30,7 +33,7 @@ public class AuditAspect {
 
     private AuditAspectDispatcher dispatcher;
 
-    @Pointcut("within(@info.atende.audition.appclient.spring.Auditable *)")
+    @Pointcut("within(@info.atende.audition.appclient.spring.annotations.Auditable *)")
     public void beanAnnotatedWithAuditable() {}
 
     @Pointcut("execution(public * *(..))")

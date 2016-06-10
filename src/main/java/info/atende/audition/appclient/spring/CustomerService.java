@@ -1,5 +1,7 @@
 package info.atende.audition.appclient.spring;
 
+import info.atende.audition.appclient.spring.annotations.Auditable;
+import info.atende.audition.appclient.spring.annotations.Audited;
 import info.atende.audition.model.SecurityLevel;
 
 /**

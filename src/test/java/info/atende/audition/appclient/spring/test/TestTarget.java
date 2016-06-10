@@ -4,8 +4,8 @@ package info.atende.audition.appclient.spring.test;
  * @author Giovanni Silva.
  */
 
-import info.atende.audition.appclient.spring.Auditable;
-import info.atende.audition.appclient.spring.Audited;
+import info.atende.audition.appclient.spring.annotations.Auditable;
+import info.atende.audition.appclient.spring.annotations.Audited;
 import info.atende.audition.model.SecurityLevel;
 import org.springframework.stereotype.Component;
 

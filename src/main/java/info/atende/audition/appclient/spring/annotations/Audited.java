@@ -1,4 +1,4 @@
-package info.atende.audition.appclient.spring;
+package info.atende.audition.appclient.spring.annotations;
 
 import info.atende.audition.model.SecurityLevel;
 

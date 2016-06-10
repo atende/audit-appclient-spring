@@ -1,7 +1,7 @@
 package info.atende.audition.appclient.spring.test;
 
-import info.atende.audition.appclient.spring.Auditable;
-import info.atende.audition.appclient.spring.NoAudit;
+import info.atende.audition.appclient.spring.annotations.Auditable;
+import info.atende.audition.appclient.spring.annotations.NoAudit;
 import org.springframework.stereotype.Component;
 
 /**
