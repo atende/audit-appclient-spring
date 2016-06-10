@@ -17,6 +17,10 @@ import java.lang.reflect.Method;
 import java.time.LocalDateTime;
 
 /**
+ * This aspect is used to dispatch AuditEvent for the queue
+ * To use you can annotate a bean with {@link Auditable} annotation
+ * or you can define your AOP Pointcut and execute the aspect {@link #dispatchAuditEvent(ProceedingJoinPoint)}
+ * @see <a href="http://atende.github.io/audit-appclient-spring">Documentation</a>
  * @author Giovanni Silva.
  */
 @Aspect

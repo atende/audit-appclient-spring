@@ -3,19 +3,15 @@ package info.atende.audition.appclient.spring;
 import info.atende.audition.model.SecurityLevel;
 
 /**
+ * Just to test
+ * TODO Remove this class
  * @author Giovanni Silva.
  */
+@Auditable
 public class CustomerService {
-    private String name;
-    private String url;
+    private String name = "Name";
+    private String url = "URL";
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
 
     public void printName() {
         System.out.println("Customer name : " + this.name);

@@ -10,7 +10,10 @@
 
     <!-- Configure Employee Bean and initialize it -->
     <bean name="costumer" class="info.atende.audition.appclient.spring.CustomerService">
-        <property name="name" value="Dummy Name"></property>
+    </bean>
+    <bean name="auditAspectDispatcher" class="info.atende.audition.appclient.spring.AuditAspectDispatcher"></bean>
+    <bean name="aspect" class="info.atende.audition.appclient.spring.AuditAspect">
+        <constructor-arg index="0" ref="auditAspectDispatcher" />
     </bean>
 
 </beans>
