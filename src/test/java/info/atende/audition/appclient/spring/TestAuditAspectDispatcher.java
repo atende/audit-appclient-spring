@@ -1,5 +1,6 @@
 package info.atende.audition.appclient.spring;
 
+import info.atende.audition.appclient.spring.providers.UserDetailsProvider;
 import info.atende.audition.model.AuditEvent;
 import info.atende.audition.model.Resource;
 import info.atende.audition.model.SecurityLevel;
@@ -11,7 +12,6 @@ import org.springframework.security.core.Authentication;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 
-import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.*;
 
@@ -26,16 +26,14 @@ public class TestAuditAspectDispatcher {
         RabbitTemplate mockTemplate = mock(RabbitTemplate.class);
         HttpServletRequest mockRequest = mock(HttpServletRequest.class);
         UserDetailsProvider mockDetailsProvider = mock(UserDetailsProvider.class);
-        AuthenticationFacade mockAuthenticationFacade = mock(AuthenticationFacade.class);
         Authentication authentication = mock(Authentication.class);
 
         // Mock behavior
         when(mockRequest.getRemoteAddr()).thenReturn("10.10.2.1");
-        when(mockDetailsProvider.getUserName(anyObject())).thenReturn("user");
-        when(mockAuthenticationFacade.getAuthentication()).thenReturn(authentication);
+        when(mockDetailsProvider.getUserName()).thenReturn("user");
 
         AuditAspectDispatcher dispatcher = new AuditAspectDispatcher(mockTemplate,
-                    mockRequest, mockDetailsProvider, mockAuthenticationFacade);
+                    mockRequest, mockDetailsProvider);
 
         dispatcher.setRabbit(mockTemplate);
 

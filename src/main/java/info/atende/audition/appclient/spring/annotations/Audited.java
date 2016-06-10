@@ -8,15 +8,16 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * Configure information about the audited method
  * @author Giovanni Silva.
  */
 @Retention(RetentionPolicy.RUNTIME)
 // TODO target ElementType.Type
 @Target({ElementType.METHOD})
 public @interface Audited {
-    public String action() default "";
-    public String resourceType() default "";
-    public String resourceId() default "";
-    public SecurityLevel securityLevel() default SecurityLevel.NORMAL;
-    public String description() default "";
+    String action() default "";
+    String resourceType() default "";
+    String resourceId() default "";
+    SecurityLevel securityLevel() default SecurityLevel.NORMAL;
+    String description() default "";
 }

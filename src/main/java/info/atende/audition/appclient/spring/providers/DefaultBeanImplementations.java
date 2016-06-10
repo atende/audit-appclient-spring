@@ -1,4 +1,4 @@
-package info.atende.audition.appclient.spring;
+package info.atende.audition.appclient.spring.providers;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -14,10 +14,5 @@ public class DefaultBeanImplementations {
     @ConditionalOnMissingBean(UserDetailsProvider.class)
     public  UserDetailsProvider userDetailsProvider(){
         return new UserDetailsProviderImpl();
-    }
-    @Bean
-    @ConditionalOnMissingBean(AuthenticationFacade.class)
-    public AuthenticationFacade authenticationFacade(){
-        return new AuthenticationFacadeImpl();
     }
 }
