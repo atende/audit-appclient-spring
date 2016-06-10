@@ -31,6 +31,7 @@ dependencies {
 	compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.21'
 	compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.21'
 	compile group: 'log4j', name: 'log4j', version: '1.2.17'
+	compile group: 'org.springframework.amqp', name: 'spring-rabbit', version: '1.6.0.RELEASE'
 
 	testCompile 'junit:junit:4.11'
 	testCompile group: 'org.springframework', name: 'spring-test', version: '4.2.6.RELEASE'

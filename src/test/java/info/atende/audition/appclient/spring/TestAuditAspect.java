@@ -63,7 +63,7 @@ public class TestAuditAspect {
     public void dispatch_event_method_with_annotation(){
         AuditAspectDispatcher mockDispatcher = createNewDispatcherMock();
         testTarget.withAnnocation();
-        verify(mockDispatcher, times(1)).dispatchEvent(eq("changeAction"), anyObject(), eq(SecurityLevel.NORMAL),
+        verify(mockDispatcher, times(1)).dispatchEvent(eq("changeAction"), anyObject(), eq(SecurityLevel.HIGHT),
                 anyObject(), eq(""));
     }
 
