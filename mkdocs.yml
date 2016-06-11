@@ -1,0 +1,3 @@
+site_name: audit-appclient-spring
+theme: readthedocs
+extra_css: [extra.css]

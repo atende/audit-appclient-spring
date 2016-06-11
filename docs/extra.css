@@ -1,0 +1,35 @@
+@media screen and (min-width: 64em){
+    .page-header {
+        padding: 5rem 6rem;
+    }
+}
+.page-header {
+    color: #fff;
+    text-align: center;
+    background-color: #cccccc;
+    background-image: linear-gradient(120deg, #2980B9, #343131);
+}
+.alert {
+    padding: 15px;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}
+
+.alert-info {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bcdff1;
+}
+
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d0e9c6;
+}
+
+.alert-warning {
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-color: #faf2cc;
+}
