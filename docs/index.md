@@ -7,6 +7,7 @@
       <a href="https://github.com/atende/audit-appclient-spring/tarball/master" class="btn btn-primary">Download .tar.gz</a>
 </section>
 
+[![wercker status](https://app.wercker.com/status/72fb2b98a53dc58f9f5d4a461c79ebf2/m "wercker status")](https://app.wercker.com/project/bykey/72fb2b98a53dc58f9f5d4a461c79ebf2)
 
 This component provides nice abstractions to intercept call's in the framework spring and generate
 audit events, for your business logic, in a robust easy to use and scalable approach
