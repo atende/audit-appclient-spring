@@ -4,3 +4,8 @@
 build/
 *.iml
 site/
+classes/
+_builds/
+_cache/
+_projects/
+_steps/
