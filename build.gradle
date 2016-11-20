@@ -6,6 +6,7 @@ buildscript {
 }
 
 apply plugin: 'java'
+apply plugin: 'idea'
 
 jar {
 	baseName = 'audit-appclient-spring'
@@ -21,6 +22,11 @@ repositories {
 	}
 }
 
+idea {
+	module {
+		excludeDirs += file('.wercker')
+	}
+}
 
 dependencies {
 	compile group: 'org.springframework', name: 'spring-aop', version: '4.2.6.RELEASE'
