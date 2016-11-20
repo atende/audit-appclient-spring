@@ -1,0 +1,9 @@
+{
+    "docs": [
+        {
+            "location": "/", 
+            "text": "Audit Appclient Spring\n\n      \nDocumentation for the project\n\n      \nView on GitHub\n\n      \nDownload .zip\n\n      \nDownload .tar.gz\n\n\n\n\n\n\n\nThis component provides nice abstractions to intercept methods in the framework spring and generate\naudit events, for your business logic, in a robust easy to use and scalable approach\n\n\n\n    \nThis documentation is a work in progress\n\n\n\n\n\nFor more information about all project components check \nProject Home", 
+            "title": "Home"
+        }
+    ]
+}
